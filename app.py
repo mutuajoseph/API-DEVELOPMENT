@@ -1,3 +1,4 @@
+import os
 import sqlite3
 from flask import Flask
 from flask_restx import Api
@@ -14,7 +15,7 @@ app = Flask(__name__)
 
 db.init_app(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'jose'
 api = Api(app)
